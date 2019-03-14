@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Provider} from "react-redux";
 import configureStore from "./redux/configureStore";
-import Question from "./Components/Question";
+import Game from "./Components/Game";
 
 import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 const bootstrapStyleSheet = new BootstrapStyleSheet();
@@ -14,7 +14,7 @@ export default class App extends React.Component {
     return (
       <Provider store={configureStore()}>
         <View style={[s.container, styles.container]}>
-          <Question question="9+7=?" choices={[3, 4, 5]}/>
+          <Game/>
         </View>
       </Provider>
     );
@@ -23,6 +23,10 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    marginTop: 100,
+    marginBottom: 100,
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "stretch"
   }
 });

@@ -18,14 +18,22 @@ export default class Question extends Component {
         choices: []
     }
 
+    createOnClickFunction = (choice) => {
+        return () => {
+            this
+                .props
+                .onClickChoice(choice);
+        };
+    };
+
     renderChoices() {
         return this
             .props
             .choices
             .map(choice => {
                 return (
-                    <View style={styles.choice} key={choice}>
-                        <TouchableOpacity >
+                    <View style={[s.row, styles.choice]} key={choice}>
+                        <TouchableOpacity onPress={this.createOnClickFunction(choice)}>
                             <Text style={[s.btn, s.btnOutlineDark, styles.choiceButton]}>{choice}</Text>
                         </TouchableOpacity>
                     </View>
@@ -35,11 +43,11 @@ export default class Question extends Component {
 
     render() {
         return (
-            <View style={[s.card, styles.questionCard]}>
-                <View style={[styles.question]}>
+            <View style={styles.questionCard}>
+                <View style={[s.row, styles.question]}>
                     <Text style={[styles.question]}>{this.props.question}</Text>
                 </View>
-                <View style={[styles.choices]}>
+                <View style={[s.row, styles.choices]}>
                     {this.renderChoices()}
                 </View>
             </View>
@@ -48,14 +56,7 @@ export default class Question extends Component {
 }
 
 const styles = StyleSheet.create({
-    questionCard: {
-        marginTop: 100,
-        marginBottom: 100,
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "stretch"
-    },
+    questionCard: {},
     question: {
         fontSize: 100,
         fontWeight: "bold",
